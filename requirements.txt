@@ -1,0 +1,7 @@
+colorama==0.4.6
+groupme_push==0.0.2
+Pygments==2.17.2
+python-dotenv==1.0.0
+regex_spm==1.0.0
+Requests==2.31.0
+websockets==11.0.3
