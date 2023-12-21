@@ -1,4 +1,5 @@
 colorama==0.4.6
+Flask==3.0.0
 groupme_push==0.0.3
 Pygments==2.17.2
 python-dotenv==1.0.0
