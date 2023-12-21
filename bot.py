@@ -1,3 +1,23 @@
+from flask import Flask
+from multiprocessing import Process
 from botfunctions import startbot
-startbot.setLoggingLevel()
-startbot.initializebot()
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+def run_flask():
+    app.run(debug=False)
+
+def run_bot():
+    startbot.setLoggingLevel()
+    startbot.initializebot()
+
+if __name__ == '__main__':
+    flask_process = Process(target=run_flask)
+    flask_process.start()
+
+    bot_process = Process(target=run_bot)
+    bot_process.start()
