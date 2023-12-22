@@ -5,32 +5,36 @@ from botfunctions import handle_messages
 import signal
 import time
 import logging 
+from plugins import handle_errors
+import sys
 
 
-def signal_handler(sig, frame):
-    print("\nStopping bot...")
+def signal_handler(client, sig, frame):
+    print("\nStopping bot")
     client.stop()
     sys.exit(0)
 
 
 def get_user_info():
     api_key = os.getenv('groupme_api_key')
-    user_id = os.getenv('groupme_user_id')
     ignore_self = (os.getenv('ignore_self', 'False') == 'True')
     logger.debug("Ignoring Own Messages: " + str(ignore_self))
-    return api_key, user_id, ignore_self
+    return api_key, ignore_self
 
 def initializebot():
-    api_key, user_id, ignore_self = get_user_info()
-    client = PushClient(access_token=api_key, on_message=handle_messages.on_message, disregard_self=ignore_self)
-    signal.signal(signal.SIGINT, signal_handler)
+    api_key, ignore_self = get_user_info()
+    client = PushClient(access_token=api_key, on_message=handle_messages.on_message, disregard_self=ignore_self, reconnect=20)
+    signal.signal(signal.SIGINT, lambda signal, frame: signal_handler(client, signal, frame))
     try:
         client.start()
         print("Bot started successfully")
         while True:
             time.sleep(1)
-    except Exception:
+    except KeyboardInterrupt:
         client.stop()
+
+    
+
         
 def setLoggingLevel():
     if os.getenv('include_debug_logs') == 'True':
