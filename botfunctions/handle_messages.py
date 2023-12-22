@@ -5,9 +5,11 @@ import json
 from colorama import init
 from plugins.LogModuleUsage import logusage 
 from commands import __all__
+import os
 
 #This fixes issues on Windows machines with raw Ascii characters showing
-init(convert=True)
+if os.name == 'nt':
+    init(convert=True)
 
 all_commands = []
 for module_name in __all__:
