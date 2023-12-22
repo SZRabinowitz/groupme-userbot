@@ -18,8 +18,8 @@ for module_name in __all__:
     print(f'Added Module: {module_name}')
 
 def on_message(message):
-    log_message_json = (os.getenv('log_message', 'False') == 'JSON')
-    if log_message_json:
+    log_message_mode = os.getenv('log_message')
+    if log_message_mode == 'JSON':
         print(highlight(json.dumps(message, indent=2), JsonLexer(), TerminalFormatter()))
     for module in all_commands:
         module.checkMessage(message)
