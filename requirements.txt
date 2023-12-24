@@ -1,6 +1,5 @@
 colorama==0.4.6
-Flask==3.0.0
-groupme_push==0.0.3
+git+https://github.com/biden2020prez/groupme-push
 Pygments==2.17.2
 python-dotenv==1.0.0
 regex_spm==1.0.0

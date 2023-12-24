@@ -4,8 +4,8 @@ import time
 import uuid
 
 
-def sendMessage(token=os.getenv('groupme_api_key'), group_id=None, text=None, message=None):
-    if text is None:
+def sendMessage(token=os.getenv('groupme_api_key'), group_id=None, text=None, message=None, images=None):
+    if text is None and images is None:
         print("Must provide text...")
         return 1
     if message is None:
@@ -29,13 +29,26 @@ def sendMessage(token=os.getenv('groupme_api_key'), group_id=None, text=None, me
         "message": {
             "source_guid": source_guid,
             "text": text,
+            "attachments": []
         }
     }
+    
+    if images: 
+        if type(images) == str:
+            images = [images]
 
+
+
+        for image in images:
+            attachment = {
+            "type": "image",
+            "url": image,
+            }
+            data['message']['attachments'].append(attachment)
+        
     response = requests.post(url, headers=headers, json=data)
 
     if response.status_code == 201:
         return "Message sent successfully."
     else:
-        return f"Failed to send message. Status code: {response.status_code}, Response: {response.text}"
-
+        return f"Failed to send message. Status code: {response.status_code}"

@@ -1,5 +1,5 @@
 import os
-from groupme_push.client import PushClient, logger
+from groupme_push.client import PushClient
 from config import botconfig
 from botfunctions import handle_messages
 import signal
@@ -8,6 +8,8 @@ import logging
 from plugins import handle_errors
 import sys
 import requests
+
+logger = logging.getLogger("gmpush-example")
 
 
 def signal_handler(client, sig, frame):
@@ -28,12 +30,16 @@ def initializebot():
         logging.basicConfig(level=logging.DEBUG)
     elif logging_method == 'file':
         logging.basicConfig(filename='gmbot.log', level=logging.DEBUG)
+    logger.setLevel(logging.INFO)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    logger.addHandler(console_handler)
     api_key, ignore_self = get_user_info()
     client = PushClient(access_token=api_key, on_message=handle_messages.on_message, disregard_self=ignore_self, reconnect=20)
     signal.signal(signal.SIGINT, lambda signal, frame: signal_handler(client, signal, frame))
     try:
         client.start()
-        print("Bot started successfully")
+        logger.info("Bot started successfully")
         while True:
             time.sleep(1)
     except KeyboardInterrupt:

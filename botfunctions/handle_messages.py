@@ -23,3 +23,4 @@ def on_message(message):
         print(highlight(json.dumps(message, indent=2), JsonLexer(), TerminalFormatter()))
     for module in all_commands:
         module.checkMessage(message)
+

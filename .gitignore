@@ -164,3 +164,4 @@ privateinfo-dev.env
 config/privateinfo.env
 config/privateinfo-dev.env
 oldbotfile.py
+gmbot.log

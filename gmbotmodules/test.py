@@ -1,5 +1,3 @@
-import time
-import asyncio
 from gmbotmodules import logusage, sendMessage
 
 
