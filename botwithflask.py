@@ -12,7 +12,6 @@ def run_flask():
     app.run(debug=False)
 
 def run_bot():
-    startbot.setLoggingLevel()
     startbot.initializebot()
 
 if __name__ == '__main__':
