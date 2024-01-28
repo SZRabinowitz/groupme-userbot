@@ -5,7 +5,6 @@ from botfunctions import handle_messages
 import signal
 import time
 import logging 
-from plugins import handle_errors
 import sys
 import requests
 
@@ -25,10 +24,10 @@ def get_user_info():
     return api_key, ignore_self
 
 def initializebot():
-    logging_method = os.getenv('logging_method')
-    if logging_method == 'console':
+    general_debug_logs = os.getenv('logging_method')
+    if general_debug_logs == 'console':
         logging.basicConfig(level=logging.DEBUG)
-    elif logging_method == 'file':
+    elif general_debug_logs == 'file':
         logging.basicConfig(filename='gmbot.log', level=logging.DEBUG)
     logger.setLevel(logging.INFO)
     console_handler = logging.StreamHandler()

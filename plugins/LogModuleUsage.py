@@ -4,11 +4,9 @@ from pathlib import Path
 
 
 def logusage():
-    # Get the caller's stack frame
-    caller_frame = inspect.stack()[1]
+    calling_module = inspect.getmodule(inspect.getouterframes(inspect.currentframe())[1][0])    
     
-    # Get the path of the file that called this, and extracts its filename without ext.
-    modulename = Path(caller_frame[1]).stem
-    
-    print("Message being handled by " + modulename)
-    return True
+    print("Message being handled by " + str(calling_module.moduleName))
+
+
+
