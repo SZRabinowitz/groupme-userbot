@@ -9,7 +9,7 @@ def hello_world():
     return 'Hello, World!'
 
 def run_flask():
-    app.run(debug=False)
+    app.run(debug=False, host='0.0.0.0', port=5000)
 
 def run_bot():
     startbot.initializebot()
