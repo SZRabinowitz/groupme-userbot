@@ -17,7 +17,12 @@ def checkMessage(message):
                 sed.load_string(repl)
                 out = sed.apply(StringIO(quoted_message['text']))
 
-            sendMessage(message=message, text=out[0])
+            if type (out) is str:
+                message_to_send = out
+            #else:
+
+
+            sendMessage(message=message, text=out[0], replyto=quoted_message['id'])
             return True
 
     return False

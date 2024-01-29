@@ -1384,16 +1384,16 @@ class Sed(object):
         except SedException as e:
             sys.stderr.write(e.message+'\n')
             self.exit_code = 1
-            self.exit_reason = e
+            self.exit_reason = [str(e)]
         except:  # noqa: E722  # pragma: no cover
             traceback.print_exception(*sys.exc_info(), file=sys.stderr)
             self.exit_code = 1
-            self.exit_reason = 'Sed: Unknown Error - Please contact the developer'
+            self.exit_reason = ['Sed: Unknown Error - Please contact the developer']
         finally:
             if self.reader:
                 self.reader.close()
             if self.exit_code == 1:
-                return self.exit_reason
+                return str(self.exit_reason)
             return self.writer.finish()
 
 
