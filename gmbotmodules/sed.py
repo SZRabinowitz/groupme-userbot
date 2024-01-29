@@ -1,5 +1,5 @@
 from gmbotmodules import logusage, sendMessage, get_message, re
-import PythonSed
+import plugins.sed as PythonSed
 from io import StringIO
 
 only_messages_with_text = True
