@@ -1384,7 +1384,7 @@ class Sed(object):
         except SedException as e:
             sys.stderr.write(e.message+'\n')
             self.exit_code = 1
-            self.exit_reason = [str(e)]
+            self.exit_reason = str(e)
         except:  # noqa: E722  # pragma: no cover
             traceback.print_exception(*sys.exc_info(), file=sys.stderr)
             self.exit_code = 1
