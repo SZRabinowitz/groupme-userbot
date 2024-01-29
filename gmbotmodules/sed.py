@@ -19,10 +19,11 @@ def checkMessage(message):
 
             if type (out) is str:
                 message_to_send = out
-            #else:
+            else:
+                message_to_send = ' '.join(out).replace('\n ', '\n') #Make sure we dont add a space in beginning of newline
 
 
-            sendMessage(message=message, text=out[0], replyto=quoted_message['id'])
+            sendMessage(message=message, text=message_to_send, replyto=quoted_message['id'])
             return True
 
     return False
