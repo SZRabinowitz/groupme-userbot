@@ -31,5 +31,4 @@ def on_message(message):
         for module in all_commands:
             if f"{module}.only_messages_with_text" in locals() and module.only_messages_with_text:
                 continue
-                module.checkMessage(message)
 

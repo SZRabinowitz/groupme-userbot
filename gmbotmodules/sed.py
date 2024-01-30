@@ -13,7 +13,7 @@ def checkMessage(message):
                 logusage()
                 quoted_message = get_message(message['group_id'], message['attachments'][0]['reply_id'])
                 sed = PythonSed.Sed()
-                repl = message['text'][4:].replace("'", '').replace('"', '').replace("'", '').replace("'", '')
+                repl = message['text'][4:].replace("'", '').replace('"', '')
                 sed.load_string(repl)
                 out = sed.apply(StringIO(quoted_message['text']))
 

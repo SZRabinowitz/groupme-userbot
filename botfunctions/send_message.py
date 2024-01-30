@@ -54,6 +54,10 @@ def sendMessage(token=os.getenv('groupme_api_key'), group_id=None, text=None, me
                 data['message']['attachments'].append(attachment)
 
         if replyto:
+            if isinstance(replyto, dict):
+                #It's a message JSON, not a string id
+                replyto = replyto['id']
+
             base_message = get_message(group_id, replyto)
             base_reply_id = replyto
             if base_message['attachments']:
