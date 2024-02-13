@@ -1,3 +1,4 @@
+import json
 import os
 from groupme_push.client import PushClient
 from config import botconfig
@@ -21,7 +22,16 @@ def get_user_info():
     api_key = os.getenv('groupme_api_key')
     ignore_self = (os.getenv('ignore_self', 'False') == 'True')
     logger.debug("Ignoring Own Messages: " + str(ignore_self))
-    return api_key, ignore_self
+    headers = {"X-Access-Token": api_key}
+    resp = requests.get(
+        "https://api.groupme.com/v3/users/me",
+        headers=headers,
+        timeout=5,
+    )
+    user = json.loads(resp.text)
+    username = user["response"]["name"]
+
+    return api_key, ignore_self, username
 
 def initializebot():
     general_debug_logs = os.getenv('logging_method')
@@ -33,12 +43,12 @@ def initializebot():
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)
     logger.addHandler(console_handler)
-    api_key, ignore_self = get_user_info()
+    api_key, ignore_self, username = get_user_info()
     client = PushClient(access_token=api_key, on_message=handle_messages.on_message, disregard_self=ignore_self, reconnect=20)
     signal.signal(signal.SIGINT, lambda signal, frame: signal_handler(client, signal, frame))
     try:
         client.start()
-        logger.info("Bot started successfully")
+        logger.info(f"Bot started successfully under account {username}")
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
