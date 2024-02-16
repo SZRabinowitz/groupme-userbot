@@ -1,6 +1,4 @@
-import re
-import json
-from gmbotmodules.mymodules import *
+from gmbotmodules.mymodules import logusage, sendMessage, random, re, json
 
 moduleName = "Compliment"
 helpString = "/comp [someone or something] will generate a compliment"
