@@ -8,15 +8,15 @@ from botfunctions.get_messages import get_message
 def sendMessage(token=os.getenv('groupme_api_key'), group_id=None, text=None, message=None, images=None, replyto=None):
     if text is None and images is None:
         print("Must provide text...")
-        return 1
+        return 0
     if message is None:
         if group_id is None:
             print("Invalid args provided. No Group_id or message specified")
-            return 1
+            return 0
     else: 
         group_id = message['group_id']
 
-    if len(text) > 1000:
+    if text and len(text) > 1000:
         w = textwrap.TextWrapper(width=1000, break_long_words=True, replace_whitespace=False)
         for msg in w.wrap(text):
             sendMessage(token=token, group_id=group_id, text=msg)
