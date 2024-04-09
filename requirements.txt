@@ -12,3 +12,4 @@ regex_spm==1.0.0
 Requests==2.31.0
 websockets==12.0
 psycopg2==2.9.9
+upsidedown==0.4
