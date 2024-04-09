@@ -1,6 +1,8 @@
 from gmbotmodules import logusage, re, sendMessage
 import json, random
 
+command = "/egg"
+case_sensitive = False
 moduleName = 'Egg'
 helpString = '/egg'
 

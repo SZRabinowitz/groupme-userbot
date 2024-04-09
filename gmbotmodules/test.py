@@ -3,7 +3,8 @@ from gmbotmodules import logusage, sendMessage
 only_messages_with_text = True
 moduleName = 'Test'
 helpString = '/test checks if the bot is on'
-
+command = '/test'
+case_sensitive = False
 def checkMessage(message):
     if message['text'] == '/test':
         logusage()

@@ -5,6 +5,8 @@ from io import StringIO
 only_messages_with_text = True
 moduleName = 'sed'
 helpString = 'reply to a message with sed <sed str> and it will parse it using gnu sed'
+command = '/sed'
+case_sensitive = False
 
 def checkMessage(message):
     if re.search(r'^sed ([\'"])*s.{2,}([\'"])*\s*$', message['text']):

@@ -3,6 +3,9 @@ from gmbotmodules import __all__
 
 moduleName = 'Help'
 helpString = '/help will show this help message'
+command = '/help'
+case_sensitive = True
+only_messages_with_text = True
 
 def checkMessage(message):
     if message['text'].strip().casefold() == '/help'.strip().casefold():

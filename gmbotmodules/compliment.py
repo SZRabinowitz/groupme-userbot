@@ -1,5 +1,9 @@
 from gmbotmodules.mymodules import logusage, sendMessage, random, re, json
 
+
+command = "/comp"
+case_sensitive = False
+starttext, case_sensitive = "/comp", False
 moduleName = "Compliment"
 helpString = "/comp [someone or something] will generate a compliment"
 

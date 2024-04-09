@@ -5,6 +5,8 @@ import json
 only_messages_with_text = True
 moduleName = 'meme'
 helpString = 'the bot will send a meme when you send /meme. Most of the memes are for programmers.'
+command = '/meme'
+case_sensitive = False
 
 def checkMessage(message):
     if message['text'].strip().casefold() == '/meme'.strip().casefold():

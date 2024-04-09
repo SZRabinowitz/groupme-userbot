@@ -7,6 +7,8 @@ import pyston
 only_messages_with_text = True
 moduleName = 'Python'
 helpString = '/python <script> will return the output'
+command = '/python'
+case_sensitive = False
 
 async def send_output(script, message):
     client = pyston.PystonClient()
